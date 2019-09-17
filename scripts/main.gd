@@ -8,16 +8,7 @@ var TaskNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
-
-	$TaskPicker.add_item("Flip")
-#	$TaskPicker.add_item("FlexiFlip")
-#	$TaskPicker.add_item("FlipValue")
-#	$TaskPicker.add_item("FlexiFlipValue")
-#	$TaskPicker.add_item("FlipInd")
-#	$TaskPicker.add_item("FlexiFlipInd")
-	Task = $TaskPicker.get_item_text(0)
-	
+	pass
 #	var TaskScript = load(String("res://scripts/" + Task))
 
 #	TaskScn = load(String("res://scenes/" + Task))
@@ -36,6 +27,8 @@ func _input(event):
 			Global.goto_scene("res://scenes/Flip.tscn")
 		if event.scancode == KEY_R:
 			Global.goto_scene("res://scenes/Reversal.tscn")
+		if event.scancode == KEY_S:
+			Global.goto_scene("res://scenes/SSRTT.tscn")
 
 #func _on_TaskPicker_item_selected(ID):
 #	Task = $TaskPicker.get_item_text(ID)
