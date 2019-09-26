@@ -7,9 +7,11 @@
 script = ExtResource( 1 )
 
 [node name="Arrow" type="Sprite" parent="."]
-position = Vector2( 546.156, 306.894 )
+position = Vector2( 963.98, 512.381 )
 texture = ExtResource( 2 )
 
 [node name="Info" type="RichTextLabel" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 882.824
+margin_top = 451.487
+margin_right = 1004.82
+margin_bottom = 510.487

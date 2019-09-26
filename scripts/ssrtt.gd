@@ -7,7 +7,7 @@ var FixationDuration = 500
 var TimerStart = int(0)
 
 var MaxTrials = 64
-var MaxBlocks =  
+var MaxBlocks =  20
 # frequency of every 7 experimental trials and at least once within maximally 15 experimental trials.
 var ProbSS =  0.25 
 var RandSS
@@ -82,8 +82,6 @@ func timer(time, event):
 # Collects inputs
 func _input(event):
 	if event is InputEventKey and !event.is_echo() and event.is_pressed():
-		PressTime = OS.get_ticks_msec()	
-		Time = 0
 		
 		if event.scancode == KEY_D:
 			Global.goto_scene("res://scenes/Main.tscn")
@@ -93,12 +91,15 @@ func _input(event):
 			print(Event)
 			Choice = 0
 			choose(Choice, PressTime)
+			PressTime = OS.get_ticks_msec()	
+			Time = 0
 
 		#choose right
 		elif event.scancode == KEY_RIGHT and InputsActive:
 			Choice = 1
 			choose(Choice, PressTime)
-			
+			PressTime = OS.get_ticks_msec()	
+			Time = 0
 
 #func timer(time, event):
 #	var CurrentTime = OS.get_ticks_msec()

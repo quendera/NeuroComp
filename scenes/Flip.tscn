@@ -16,11 +16,11 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="LeftPoke" type="AnimatedSprite" parent="."]
-position = Vector2( 127.368, 227.368 )
+position = Vector2( 635.91, 499.121 )
 frames = SubResource( 1 )
 
 [node name="RightPoke" type="AnimatedSprite" parent="."]
-position = Vector2( 784.21, 237.895 )
+position = Vector2( 1292.75, 509.648 )
 frames = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
