@@ -3,17 +3,18 @@ extends Node
 var ID
 var ReversalData
 var Task = "Reversal"
-var Version = "NeuroComp0.1"
+var Version = Global.Version
 var save_file_name
 
 var StimDuration = 3000 #number in ms
-var FeedbackDuration = 2000
+var FeedbackDuration = 1500
 var FixationDuration = 1000
 var TimerStart = 0
 
 var MaxTrials = 400
 var Trial
 var TrialStart
+
 # frequency of every 7 experimental trials and at least once within maximally 15 experimental trials.
 var HighStimuli 
 var RandSide
@@ -99,7 +100,7 @@ func timer(time, event):
 func _input(event):
 	if event is InputEventKey and !event.is_echo() and event.is_pressed():
 		ChoiceTime = OS.get_ticks_msec()
-		if event.scancode == KEY_D:
+		if event.scancode == KEY_Q:
 			end_task()
 		
 		#choose left
@@ -122,7 +123,6 @@ func _input(event):
 #	while CurrentTime < TimerStart + time:
 #		CurrentTime = OS.get_ticks_msec()
 #		print(CurrentTime)
-#	emit_signal(event)
 
 
 func _process(delta):
@@ -133,6 +133,8 @@ func _process(delta):
 
 func choose(choice):
 	if !BL:
+		Event = "choice"
+		log_data(Event)
 		if choice == 0 and RandSide == 0 and HighStimuli == 0:
 			punish()
 		elif choice == 0 and RandSide == 0 and HighStimuli == 1:
@@ -149,15 +151,14 @@ func choose(choice):
 			punish()
 		elif choice == 1 and RandSide == 1 and HighStimuli == 1:
 			reward()
-		Event = "choice"
-		log_data(Event)
 	else:
+		Event = "choice_bl"
+		log_data(Event)
 		if (choice - RandSide) == 0:
 			reward_bl()
 		else:
 			punish_bl()
-		Event = "choice_bl"
-		log_data(Event)
+
 
 func reward_bl():
 	$Info.set_text(str("GOOD CHOICE"))
@@ -174,7 +175,6 @@ func reward():
 	var RandP = rand_range(0,1)
 	RewardSize = (randi() % 171) + 80
 	print(RewardSize)
-	$TotInfo.set_text(str(Score, " TOTAL POINTS"))
 	if RandP <= RewardProb:
 		Score = Score + RewardSize
 		CRStreak += 1
@@ -203,6 +203,7 @@ func reward():
 		$Info.set_text(str("- ", PunishSize, " POINTS"))
 		Event = "pe"
 		log_data(Event)
+	$TotInfo.set_text(str(Score, " TOTAL POINTS"))
 	reverse()
 
 func punish():
@@ -330,4 +331,3 @@ func end_task():
 	file.store_line(to_json(ReversalData))
 	file.close()
 	Global.goto_scene("res://scenes/Main.tscn")
-	

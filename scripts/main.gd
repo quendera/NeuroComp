@@ -1,42 +1,23 @@
 extends Node2D
 
-var TaskScn = preload("res://scenes/Flip.tscn")
-var Task
+var TaskScn = preload("res://scenes/Flip/Flip.tscn")
 
-var TaskNode
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-#	var TaskScript = load(String("res://scripts/" + Task))
 
-#	TaskScn = load(String("res://scenes/" + Task))
-#	TaskNode = TaskScn.instance()
-#	TaskNode.set_script(TaskScript)
-#	Task = $TaskPicker.get_item_text(0) #If you don't select anything, defaults to first option
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func _input(event):
-	if event is InputEventKey:
+	if event is InputEventKey and !event.is_echo() and event.is_pressed():
 		if event.scancode == KEY_F:
-			Global.goto_scene("res://scenes/Flip.tscn")
+			Global.goto_scene("res://scenes/Flip/Flip.tscn")
 		if event.scancode == KEY_R:
 			Global.goto_scene("res://scenes/Reversal.tscn")
 		if event.scancode == KEY_S:
 			Global.goto_scene("res://scenes/SSRTT.tscn")
-
-#func _on_TaskPicker_item_selected(ID):
-#	Task = $TaskPicker.get_item_text(ID)
-#	var TaskScript = load(String("res://scripts/" + Task))
-#
-#	TaskScn = load(String("res://scenes/" + Task))
-#	TaskNode = TaskScn.instance()
-#	add_child(TaskNode)
-#
-#	TaskNode.set_script(TaskScript)
-#
+		if event.scancode == KEY_V:
+			$volume_test.play()
+		if event.scancode == KEY_Q:
+			get_tree().quit()
